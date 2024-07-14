@@ -31,29 +31,72 @@
           </div>
         </form>
     
-        <div class="row g-2">
-          <div class="col-md-8 offset-md-2">
-            <div class="row mb-3 mt-5 fs-5 font-weight-bold">
-              <div class="col">Food Name</div>
-              <div class="col">Carbs</div>
-              <div class="col">Protein</div>
-              <div class="col">Fats</div>
-              <div class="col">Calories</div>
-            </div>
-            {% for c in consumed_food %}
-              <div class="row mb-2 align-items-center">
-                <div class="col">{{ c.food_consumed.name }}</div>
-                <div class="col">{{ c.food_consumed.carbs }}</div>
-                <div class="col">{{ c.food_consumed.protein }}</div>
-                <div class="col">{{ c.food_consumed.fats }}</div>
-                <div class="col">{{ c.food_consumed.calories }}</div>
-              </div>
-            {% endfor %}
-          </div>
-        </div>
-      </div>
+        
 
+        <div class="row">
+            <div class="col-md-6">
+                <div>
+                    <h4 class="text-center">Today's Consumption</h4>
+                </div>
+                <table id="table" class="table table-striped table-primary">
+                    <tr class="bg-primary text-white">
+                        <th>Food item</th>
+                        <th>Carbs(gm)</th>
+                        <th>Protein(gm)</th>
+                        <th>Fats(gm)</th>
+                        <th>Calories(kcal)</th>
+
+                    </tr>
+                        {% for c in consumed_food %}
+                        <tr>
+                            <td>{{ c.food_consumed.name }}</td> 
+                            <td>{{ c.food_consumed.carbs }}</td>
+                            <td>{{ c.food_consumed.protein }}</td>
+                            <td>{{ c.food_consumed.fats }}</td>
+                            <td>{{ c.food_consumed.calories }}</td>
+                        
+
+                        </tr>
+                    {% endfor %}
+
+                    <tr>
+                        <td id="name"><b>Total</b></td>
+                        <td id="totalCarbs"><b></b></td>
+                        <td id="totalProtein"><b></b></td>
+                        <td id="totalFats"><b></b></td>
+                        <td id="totalCalories"><b></b></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-md-5 offset-1"></div>
+        </div>
+
+
+             
+   
 
 
 </body>
+<script>
+    var table = document.getElementById('table');
+    var carbs = 0, protein= 0, fats = 0, calories = 0;
+
+    for(var i=1; i<table.rows.length-1;i++){
+
+        carbs += parseFloat(table.rows[i].cells[1].innerHTML);
+        carbs = Math.round(carbs);
+        protein += parseFloat(table.rows[i].cells[2].innerHTML);
+        protein = Math.round(protein);
+        fats += parseFloat(table.rows[i].cells[3].innerHTML);
+        fats = Math.round(fats);
+        calories += parseFloat(table.rows[i].cells[4].innerHTML);
+        calories = Math.round(calories);
+
+        document.getElementById('totalCarbs').innerHTML = '<b>' + carbs+'(gm)</b>'
+        document.getElementById('totalProtein').innerHTML = '<b>' + protein+'(gm)</b>'
+        document.getElementById('totalFats').innerHTML = '<b>' + fats+'(gm)</b>'
+        document.getElementById('totalCalories').innerHTML = '<b>' + calories+'Kcal </b>'
+    }
+
+</script>
 </html>
