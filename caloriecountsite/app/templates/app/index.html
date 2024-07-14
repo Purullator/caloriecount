@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/18498c0e87.js" crossorigin="anonymous"></script>
+    
+</head>
+<body>
+
+
+    <div class="container mt-5">
+        <form action="" method="post" class="mb-4">
+          {% csrf_token %}
+          <div class="row g-2">
+            <div class="col-md-8 offset-md-2">
+              <label for="food_consumed" class="form-label">Select Food to add:</label>
+              <div class="input-group">
+                <select name="food_consumed" id="food_consumed" class="form-select">
+                  {% for food in foods %}
+                    <option value="{{ food.name }}">{{ food.name }}</option>
+                  {% endfor %}
+                </select>
+                <button type="submit" class="btn btn-success">Add</button>
+              </div>
+            </div>
+          </div>
+        </form>
+    
+        <div class="row g-2">
+          <div class="col-md-8 offset-md-2">
+            <div class="row mb-3 mt-5 fs-5 font-weight-bold">
+              <div class="col">Food Name</div>
+              <div class="col">Carbs</div>
+              <div class="col">Protein</div>
+              <div class="col">Fats</div>
+              <div class="col">Calories</div>
+            </div>
+            {% for c in consumed_food %}
+              <div class="row mb-2 align-items-center">
+                <div class="col">{{ c.food_consumed.name }}</div>
+                <div class="col">{{ c.food_consumed.carbs }}</div>
+                <div class="col">{{ c.food_consumed.protein }}</div>
+                <div class="col">{{ c.food_consumed.fats }}</div>
+                <div class="col">{{ c.food_consumed.calories }}</div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+
+
+
+</body>
+</html>
